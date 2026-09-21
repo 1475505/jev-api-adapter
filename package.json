@@ -1,0 +1,25 @@
+{
+  "name": "jev-adapter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A Cloudflare Workers bridge from OpenAI Chat/Responses to Jev decisions",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build": "wrangler deploy --dry-run --outdir dist",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test test/*.test.ts",
+    "check": "npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "openai": "^7.20.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.136.0"
+  }
+}
