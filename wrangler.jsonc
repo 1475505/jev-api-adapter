@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "jev-adapter",
+  "name": "jev-api-adapter",
   "main": "src/index.ts",
   "compatibility_date": "2026-09-21",
   "workers_dev": true,

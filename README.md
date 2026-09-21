@@ -1,4 +1,4 @@
-# Jev Adapter
+# Jev API Adapter
 
 在 Cloudflare Workers 上，把 Jev 决策接口包装成 OpenAI Chat Completions / Responses 协议。支持 TypeSafe、Vercel AI Gateway、OpenRouter。运行时代码无第三方依赖，不需要数据库。
 
@@ -239,7 +239,7 @@ npx wrangler secret put BRIDGE_API_KEY
 npm run deploy
 ```
 
-Wrangler 输出 `https://jev-adapter.<your-subdomain>.workers.dev`，SDK `baseURL` 设置为该地址加 `/v1`。无需把供应商 Key 部署到 Worker。
+Wrangler 输出 `https://jev-api-adapter.<your-subdomain>.workers.dev`，SDK `baseURL` 设置为该地址加 `/v1`。无需把供应商 Key 部署到 Worker。
 
 如果浏览器直接调用，在 `CORS_ORIGINS` 配置准确的前端 origin（逗号分隔，不支持 `*`）。这只控制浏览器跨域，不替代鉴权。服务端 SDK 不需要 CORS。
 

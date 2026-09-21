@@ -9,8 +9,8 @@
 ### 方式 A：从本机部署
 
 ```sh
-git clone https://github.com/1475505/jev-adapter.git
-cd jev-adapter
+git clone https://github.com/1475505/jev-api-adapter.git
+cd jev-api-adapter
 npm ci
 npm run check
 npx wrangler login
@@ -19,14 +19,14 @@ npx wrangler secret put BRIDGE_API_KEY
 npm run deploy
 ```
 
-私有仓库需先登录 GitHub。Wrangler 输出部署域名，例如 `https://jev-adapter.<subdomain>.workers.dev`。
+私有仓库需先登录 GitHub。Wrangler 输出部署域名，例如 `https://jev-api-adapter.<subdomain>.workers.dev`。
 
 ### 方式 B：连接 GitHub 自动部署
 
 1. 在 Cloudflare Dashboard 进入 **Workers & Pages**，创建 Worker，选择导入 Git 仓库（不是创建 Pages 静态站）。
-2. 授权 Cloudflare 访问 `1475505/jev-adapter` 私有仓库，选择 `main` 分支，根目录为仓库根目录。
+2. 授权 Cloudflare 访问 `1475505/jev-api-adapter` 私有仓库，选择 `main` 分支，根目录为仓库根目录。
 3. 安装命令使用 `npm ci`（若界面自动识别 npm，可保留自动安装）；Build command 填 `npm run typecheck`；Deploy command 填 `npx wrangler deploy`。
-4. Worker 名称与 `wrangler.jsonc` 中的 `jev-adapter` 一致。部署后，按需在 Worker 的运行时 Variables and Secrets 添加 `BRIDGE_API_KEY`，类型为 Secret。
+4. Worker 名称与 `wrangler.jsonc` 中的 `jev-api-adapter` 一致。部署后，按需在 Worker 的运行时 Variables and Secrets 添加 `BRIDGE_API_KEY`，类型为 Secret。
 5. `ALLOWED_UPSTREAM_ORIGINS` 和 `CORS_ORIGINS` 由 `wrangler.jsonc` 的 vars 管理；修改后提交，避免下一次部署覆盖 Dashboard 上的普通变量。
 
 官方说明：[Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/)。免费额度不包含上游 Jev 的推理费用。
@@ -35,7 +35,7 @@ npm run deploy
 
 项目已提供 `api/` 函数入口和 `vercel.json`，与 Worker 共用 `src/` 的桥接逻辑。采用 Node.js Functions，不需要 Next.js。
 
-1. 在 Vercel 点击 **Add New → Project**，导入 `1475505/jev-adapter`。GitHub App 必须获得这个私有仓库的访问权限。
+1. 在 Vercel 点击 **Add New → Project**，导入 `1475505/jev-api-adapter`。GitHub App 必须获得这个私有仓库的访问权限。
 2. Framework Preset 选 **Other**，Root Directory 为仓库根目录。
 3. 项目的 `vercel.json` 已设置 Install Command=`npm ci`、Build Command=`npm run typecheck`、Output Directory=`public`。**不要将 Vercel 的构建命令设成 `npm run build`，那个脚本用于 Cloudflare 打包。**
 4. Node.js 选择平台支持的 22.x 或更高版本。按需添加下面的运行时环境变量，并选择 Production（需要预览环境时也选择 Preview）。
